@@ -6,12 +6,27 @@ import './index.css'
 class JyankeGamePage extends Component {
   constructor(props) {
     super(props)
+    // 初期値を設定
     this.state = {human: null, computer: null}
   }
+
+  // componentDidMount(){
+  //   setTimeout(() => {this.pon(1)}, 1000)
+  // }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    const identical = nextState.human == this.state.human && nextState.computer == this.state.computer
+    if (identical) { console.log("*Identical*") }
+    return !identical
+  }
+
+  // 手の設定
   pon(human_hand) {
     const computer_hand = Math.floor(Math.random() * 3)
+    // 初期値を変更
     this.setState({human: human_hand, computer: computer_hand})
   }
+  // ジャンケンの勝敗を決める
   judge() {
     if (this.state.human == null) {
       return null
